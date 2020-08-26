@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{6775D533-AB61-6128-8EE6-FC08D94C6146}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CameraController.cs" Line="28" Column="1" />
+      <File FileName="Assets/Scripts/RaceManager.cs" Line="86" Column="28" />
+      <File FileName="Assets/Scripts/UIManager.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Arcade Racer" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="CameraController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Debugger.DebugSourceFolders />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9667ab16-8903-4fc1-903d-fc3d5e14c9eb" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/_Udemy Racer Assets/Tracks/Track1_Grassy.unity
+  isLoaded: 1
+  isActive: 1

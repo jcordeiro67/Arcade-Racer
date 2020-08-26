@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1498515008725578336
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2370105403162460537, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460542, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: theRB
+      value: 
+      objectReference: {fileID: 3760370692212889805}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: engineSound
+      value: 
+      objectReference: {fileID: 3760370691913770379}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: skidSound
+      value: 
+      objectReference: {fileID: 3760370693101269147}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: leftFrontWheel
+      value: 
+      objectReference: {fileID: 1252567518021739998}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: rightFrontWheel
+      value: 
+      objectReference: {fileID: 1252567518021739996}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: groundRayPointFront
+      value: 
+      objectReference: {fileID: 3760370692973764476}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: groundRayPointRear
+      value: 
+      objectReference: {fileID: 3760370691968823098}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: dustVFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 3760370692514562687}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: dustVFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 3760370692774698828}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: dustVFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 3760370692026707098}
+    - target: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: dustVFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 3760370691697703165}
+    - target: {fileID: 2370105403578935969, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: CarHitSound
+      value: 
+      objectReference: {fileID: 3760370692278084639}
+    - target: {fileID: 2370105403578935974, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: theCar
+      value: 
+      objectReference: {fileID: 3760370691759043359}
+    - target: {fileID: 408078189158995286, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50ba4e47770de4ae38022bdeeab667fa, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70d3770bcd6bd4f11b8070990a59ea7a, type: 3}
+--- !u!114 &3760370691759043359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2370105403162460543, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f04a67b4072345e2a7fa49dc386bf7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &3760370692212889805 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2370105403578935981, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3760370692973764476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2370105404371791132, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3760370691968823098 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2370105403355340122, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3760370692514562687 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2370105403883335711, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3760370692774698828 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2370105404157717804, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3760370692026707098 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2370105403429576442, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3760370691697703165 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2370105403095878301, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3760370691913770379 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2370105403282462699, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3760370692278084639 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2370105403647956607, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3760370693101269147 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2370105404504589051, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1252567518021739998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 408078189157226430, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1252567518021739996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 408078189157226428, guid: 70d3770bcd6bd4f11b8070990a59ea7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1498515008725578336}
+  m_PrefabAsset: {fileID: 0}
