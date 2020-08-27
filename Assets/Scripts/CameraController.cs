@@ -12,9 +12,11 @@ public class CameraController : MonoBehaviour {
 	private float activeDistance;
 	private Vector3 offsetDir;
 
+
 	// Start is called before the first frame update
 	void Start ()
 	{
+
 		offsetDir = transform.position - startPositionOffset.position;
 		activeDistance = minDistance;
 

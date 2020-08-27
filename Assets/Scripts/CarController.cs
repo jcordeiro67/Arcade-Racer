@@ -115,7 +115,7 @@ public class CarController : MonoBehaviour {
 					resetCounter -= Time.deltaTime;
 				}
 
-				if (Input.GetKeyDown (KeyCode.R) && resetCoolDown <= 0) {
+				if (Input.GetKeyDown (KeyCode.R) && resetCounter <= 0) {
 					ResetToTrack ();
 				}
 
@@ -299,6 +299,7 @@ public class CarController : MonoBehaviour {
 
 	void ResetToTrack ()
 	{
+		print ("reset to track called");
 		int pointToGoTo = nextCheckPoint - 1;
 		if (pointToGoTo < 0) {
 			pointToGoTo = RaceManager.instance.allCheckPoints.Length - 1;

@@ -22,12 +22,14 @@ public class RaceManager : MonoBehaviour {
 	private float posCheckCounter;
 	public bool isStarting;
 	public float timeBetweenStartCount = 1f;
-	private float startCounter;
 	public int countDownCurrent = 3;
 	public ParticleSystem raceStartVFX;
 	public int playerStartPosition;
 	public int aiNumberToSpawn;
 	public Transform [] startPositions;
+	public List<CarController> carToSpawn = new List<CarController> ();
+	private float startCounter;
+	//private GameObject thePlayer;
 
 	private void Awake ()
 	{
@@ -37,6 +39,7 @@ public class RaceManager : MonoBehaviour {
 		for (int i = 0; i < allCheckPoints.Length; i++) {
 			allCheckPoints [i].checkPointNumber = i;
 		}
+
 	}
 
 	// Start is called before the first frame update
@@ -48,11 +51,15 @@ public class RaceManager : MonoBehaviour {
 		UIManager.instance.countdownText.gameObject.SetActive (true);
 		UIManager.instance.countdownText.text = countDownCurrent + "!";
 
-		//Player Start Position
-		playerStartPosition = Random.Range (0, aiNumberToSpawn);
+		//Spawn Player at random Start Position
+		playerStartPosition = Random.Range (0, aiNumberToSpawn + 1);
+
+		playerCar.gameObject.name = "The Player";
+		playerCar.gameObject.tag = "Player";
 
 		playerCar.transform.position = startPositions [playerStartPosition].position;
 		playerCar.theRB.transform.position = startPositions [playerStartPosition].position;
+
 		/////////////////////Rubber Banding Experimantal Code//////////////////////////////////////////
 		//add half the difference between the players max speed and the aiDefaultSpeed
 		if (playerDefaultSpeed != playerCar.maxSpeed) {
@@ -65,6 +72,15 @@ public class RaceManager : MonoBehaviour {
 			aiDefaultSpeed += Mathf.Abs (playerCar.maxSpeed - aiDefaultSpeed) * .5f;
 		}
 		//////////////////////////////////////END CODE/////////////////////////////////////////////////
+
+		for (int i = 0; i < aiNumberToSpawn + 1; i++) {
+			if (i != playerStartPosition) {
+				int selectedCar = Random.Range (0, carToSpawn.Count);
+				allAICars.Add (Instantiate (carToSpawn [selectedCar], startPositions [i].position, startPositions [i].rotation));
+
+				carToSpawn.RemoveAt (selectedCar);
+			}
+		}
 	}
 
 	// Update is called once per frame
