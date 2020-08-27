@@ -25,7 +25,9 @@ public class RaceManager : MonoBehaviour {
 	private float startCounter;
 	public int countDownCurrent = 3;
 	public ParticleSystem raceStartVFX;
-
+	public int playerStartPosition;
+	public int aiNumberToSpawn;
+	public Transform [] startPositions;
 
 	private void Awake ()
 	{
@@ -45,6 +47,24 @@ public class RaceManager : MonoBehaviour {
 		//Enable Start Counter text and set to current countdown from Editor
 		UIManager.instance.countdownText.gameObject.SetActive (true);
 		UIManager.instance.countdownText.text = countDownCurrent + "!";
+
+		//Player Start Position
+		playerStartPosition = Random.Range (0, aiNumberToSpawn);
+
+		playerCar.transform.position = startPositions [playerStartPosition].position;
+		playerCar.theRB.transform.position = startPositions [playerStartPosition].position;
+		/////////////////////Rubber Banding Experimantal Code//////////////////////////////////////////
+		//add half the difference between the players max speed and the aiDefaultSpeed
+		if (playerDefaultSpeed != playerCar.maxSpeed) {
+			//Set the playerDefault Speed
+			playerDefaultSpeed = playerCar.maxSpeed;
+		}
+
+		if (aiDefaultSpeed <= playerCar.maxSpeed) {
+			//Set the aiDefaultSpeed
+			aiDefaultSpeed += Mathf.Abs (playerCar.maxSpeed - aiDefaultSpeed) * .5f;
+		}
+		//////////////////////////////////////END CODE/////////////////////////////////////////////////
 	}
 
 	// Update is called once per frame
@@ -86,7 +106,7 @@ public class RaceManager : MonoBehaviour {
 			if (posCheckCounter <= 0) {
 				playerPos = 1;
 
-				if (allAICars.Count >= 1) {
+				if (allAICars.Count > 0) {
 
 					//Check player position
 					foreach (CarController aiCar in allAICars) {

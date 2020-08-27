@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 2927623476948114207, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: m_Name
-      value: PlayerCar
+      value: Sedan Sports
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114200, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114200, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 2927623476948114200, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114200, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}

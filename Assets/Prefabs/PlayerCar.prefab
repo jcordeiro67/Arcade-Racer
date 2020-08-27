@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927623476948114207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.953, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2927623478363294510}
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theRB: {fileID: 2927623477636886731}
+  isAI: 0
   maxSpeed: 25
   forwardAccel: 8
   reverseAccel: 4
@@ -67,6 +68,9 @@ MonoBehaviour:
   engineSound: {fileID: 2927623477337722253}
   skidSound: {fileID: 2927623478290372765}
   skidFadeSpeed: 2
+  currentLap: 1
+  nextCheckPoint: 0
+  resetCoolDown: 2
   leftFrontWheel: {fileID: 2927623478363294502}
   rightFrontWheel: {fileID: 2927623478363294496}
   groundRayPointFront: {fileID: 2927623478431315834}
@@ -86,6 +90,14 @@ MonoBehaviour:
   emmissionFadeSpeed: 50
   turningThreshold: 0.5
   speedThreshold: 0.5
+  lapTime: 0
+  bestLapTime: 0
+  currentTarget: 0
+  aiAccelerationSpeed: 1
+  aiTurnSpeed: 0.8
+  aiReachPointRange: 5
+  aiPointVariance: 3
+  aiMaxTurn: 15
 --- !u!1 &2927623477155205368
 GameObject:
   m_ObjectHideFlags: 0

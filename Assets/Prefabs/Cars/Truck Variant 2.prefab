@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 1728681695067367551, guid: c4a0d0a1293c74166bf93b9ec6415da0,
         type: 3}
       propertyPath: m_Name
-      value: Truck
+      value: Truck Variant 2
       objectReference: {fileID: 0}
     - target: {fileID: 1728681695067367544, guid: c4a0d0a1293c74166bf93b9ec6415da0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1728681695067367544, guid: c4a0d0a1293c74166bf93b9ec6415da0,
         type: 3}
@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 1728681695067367544, guid: c4a0d0a1293c74166bf93b9ec6415da0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1728681695067367544, guid: c4a0d0a1293c74166bf93b9ec6415da0,
         type: 3}

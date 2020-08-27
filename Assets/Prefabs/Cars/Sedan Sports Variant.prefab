@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 938908021822111083, guid: c7ea398cfa98b46a0920b48a1a5a4e99,
         type: 3}
       propertyPath: m_Name
-      value: Sedan Sports
+      value: Sedan Sports Variant
       objectReference: {fileID: 0}
     - target: {fileID: 938908021822111084, guid: c7ea398cfa98b46a0920b48a1a5a4e99,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 938908021822111084, guid: c7ea398cfa98b46a0920b48a1a5a4e99,
         type: 3}
@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 938908021822111084, guid: c7ea398cfa98b46a0920b48a1a5a4e99,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 938908021822111084, guid: c7ea398cfa98b46a0920b48a1a5a4e99,
         type: 3}
