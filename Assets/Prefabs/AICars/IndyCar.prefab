@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2927623478290372765, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: leftFrontWheel
@@ -149,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: maxSpeed
-      value: 30
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
@@ -169,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: aiMaxTurn
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
@@ -241,11 +246,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2927623478363789070, guid: 689d743aba7744110b03aee38d4650a3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2927623477636886727, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: CarHitSound
@@ -256,6 +256,11 @@ PrefabInstance:
       propertyPath: theCar
       value: 
       objectReference: {fileID: 2304253892184990790}
+    - target: {fileID: 2927623478363789070, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 689d743aba7744110b03aee38d4650a3, type: 3}
 --- !u!4 &2304253892184990791 stripped

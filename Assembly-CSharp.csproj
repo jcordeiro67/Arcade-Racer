@@ -70,7 +70,9 @@
     <Compile Include="Assets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\CheckPointChecker.cs" />
     <Compile Include="Assets\Scripts\DisableOverTime.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlaySoundOnCollision.cs" />
+    <Compile Include="Assets\Scripts\RaceInfoManager.cs" />
     <Compile Include="Assets\Scripts\RaceManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

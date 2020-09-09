@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2927623478290372765, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: isAI
@@ -127,6 +132,21 @@ PrefabInstance:
       propertyPath: dustVFX.Array.data[3]
       value: 
       objectReference: {fileID: 938908021612918415}
+    - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: aiReachPointRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: aiPointVariance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: aiMaxTurn
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114202, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: m_Enabled

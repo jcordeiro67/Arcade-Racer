@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour {
 
+	public static CameraSwitcher instance;
 	public GameObject [] cameras;
 
 	private int currentCam;
+	public CameraController topDownCamera;
+	public Cinemachine.CinemachineVirtualCamera cineCam;
 
+	private void Awake ()
+	{
+		instance = this;
+	}
 
 	// Start is called before the first frame update
 	void Start ()
@@ -32,5 +39,13 @@ public class CameraSwitcher : MonoBehaviour {
 				cameras [i].SetActive (false);
 			}
 		}
+	}
+
+	public void SetTarget (CarController playerCar)
+	{
+		topDownCamera.target = playerCar;
+		cineCam.m_Follow = playerCar.transform;
+		cineCam.m_LookAt = playerCar.transform;
+
 	}
 }

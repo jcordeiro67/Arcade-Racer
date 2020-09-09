@@ -177,8 +177,10 @@ public class CarController : MonoBehaviour {
 			}
 
 			//Engine Sound
-			if (engineSound != null) {
+			if (engineSound != null && !UIManager.instance.isPaused) {
 				engineSound.pitch = 1f + (theRB.velocity.magnitude / maxSpeed) * 2f;
+			} else {
+				engineSound.pitch = 0f;
 			}
 
 			//Skid Sound
@@ -238,7 +240,6 @@ public class CarController : MonoBehaviour {
 				new Vector3 (0f, turnInput * turnStrength * Time.deltaTime * Mathf.Sign (speedInput) * (theRB.velocity.magnitude / maxSpeed), 0f));
 
 		}
-		//Debug.Log (theRB.velocity.magnitude);
 	}
 
 
@@ -276,19 +277,38 @@ public class CarController : MonoBehaviour {
 	{
 		//Add a Lap
 		currentLap++;
+
 		//Best lap time check
 		if (lapTime < bestLapTime || bestLapTime == 0) {
 			bestLapTime = lapTime;
 		}
 
-		lapTime = 0f;
+		if (currentLap <= RaceManager.instance.totalLaps) {
+			//Reset lapCounter
+			lapTime = 0f;
 
-		if (!isAI) {
-			//Set bestLapTime UI Text
-			var ts = System.TimeSpan.FromSeconds (bestLapTime);
-			UIManager.instance.bestLapTimeText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+			if (!isAI) {
+				//Set bestLapTime UI Text
+				var ts = System.TimeSpan.FromSeconds (bestLapTime);
+				UIManager.instance.bestLapTimeText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+				//Update lapCounter
+				UIManager.instance.lapCounterText.text = currentLap + "/" + RaceManager.instance.totalLaps;
+			}
+		} else {
+			//End Race
+			if (!isAI) {
+				//Set car to AI Control and set next target
+				isAI = true;
+				aiSpeedMod = 1f;
+				targetPoint = RaceManager.instance.allCheckPoints [currentTarget].transform.position;
+				RandomizeAITarget ();
 
-			UIManager.instance.lapCounterText.text = currentLap + "/" + RaceManager.instance.totalLaps;
+				//UpDate bestLap UI
+				var ts = System.TimeSpan.FromSeconds (bestLapTime);
+				UIManager.instance.bestLapTimeText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+				UIManager.instance.raceEndBestLapText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+				RaceManager.instance.FinishRace ();
+			}
 		}
 	}
 
@@ -299,7 +319,6 @@ public class CarController : MonoBehaviour {
 
 	void ResetToTrack ()
 	{
-		print ("reset to track called");
 		int pointToGoTo = nextCheckPoint - 1;
 		if (pointToGoTo < 0) {
 			pointToGoTo = RaceManager.instance.allCheckPoints.Length - 1;

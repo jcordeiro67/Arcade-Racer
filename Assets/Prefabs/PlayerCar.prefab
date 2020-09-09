@@ -93,7 +93,7 @@ MonoBehaviour:
   lapTime: 0
   bestLapTime: 0
   currentTarget: 0
-  aiAccelerationSpeed: 1
+  aiAccelerationSpeed: 0.8
   aiTurnSpeed: 0.8
   aiReachPointRange: 5
   aiPointVariance: 3

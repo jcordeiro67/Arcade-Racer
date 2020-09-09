@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RaceManager : MonoBehaviour {
 
@@ -10,7 +11,6 @@ public class RaceManager : MonoBehaviour {
 	public CarController playerCar;
 	[Tooltip ("The array of checkPoints on the track")]
 	public CheckPoint [] allCheckPoints;
-	[Tooltip ("The List of AI Cars")]
 	public List<CarController> allAICars = new List<CarController> ();
 	public int playerPos;
 	[Tooltip ("The time between position checks")]
@@ -28,24 +28,30 @@ public class RaceManager : MonoBehaviour {
 	public int aiNumberToSpawn;
 	public Transform [] startPositions;
 	public List<CarController> carToSpawn = new List<CarController> ();
+	public bool raceCompleted;
 	private float startCounter;
-	//private GameObject thePlayer;
 
 	private void Awake ()
 	{
 		instance = this;
-
-		//Assign each checkpoint it's number from the array index
-		for (int i = 0; i < allCheckPoints.Length; i++) {
-			allCheckPoints [i].checkPointNumber = i;
-		}
 
 	}
 
 	// Start is called before the first frame update
 	void Start ()
 	{
+		totalLaps = RaceInfoManager.instance.noOfLaps;
+		aiNumberToSpawn = RaceInfoManager.instance.noOfAi;
+
+		//Assign each checkpoint it's number from the array index
+		for (int i = 0; i < allCheckPoints.Length; i++) {
+			allCheckPoints [i].checkPointNumber = i;
+		}
+
 		isStarting = true;
+		//Ensure Race Results panel is off
+		UIManager.instance.raceResultsPanel.SetActive (false);
+		//Start countdown timer to start number
 		startCounter = timeBetweenStartCount;
 		//Enable Start Counter text and set to current countdown from Editor
 		UIManager.instance.countdownText.gameObject.SetActive (true);
@@ -54,11 +60,22 @@ public class RaceManager : MonoBehaviour {
 		//Spawn Player at random Start Position
 		playerStartPosition = Random.Range (0, aiNumberToSpawn + 1);
 
+		//Spawn player car at the playerStartPosition
+		playerCar = Instantiate (RaceInfoManager.instance.racerCar, startPositions [playerStartPosition].position, startPositions [playerStartPosition].rotation);
+		//Set playerCar ai to false
+		playerCar.isAI = false;
+		//enable audioListner for playerCar
+		playerCar.GetComponent<AudioListener> ().enabled = true;
+
+		//Set Camera target
+		CameraSwitcher.instance.SetTarget (playerCar);
 		playerCar.gameObject.name = "The Player";
 		playerCar.gameObject.tag = "Player";
+		//Set player position in UI
+		UIManager.instance.playerPosText.text = (playerStartPosition + 1) + "/" + (aiNumberToSpawn + 1);
 
-		playerCar.transform.position = startPositions [playerStartPosition].position;
-		playerCar.theRB.transform.position = startPositions [playerStartPosition].position;
+		//playerCar.transform.position = startPositions [playerStartPosition].position;
+		//playerCar.theRB.transform.position = startPositions [playerStartPosition].position;
 
 		/////////////////////Rubber Banding Experimantal Code//////////////////////////////////////////
 		//add half the difference between the players max speed and the aiDefaultSpeed
@@ -67,10 +84,10 @@ public class RaceManager : MonoBehaviour {
 			playerDefaultSpeed = playerCar.maxSpeed;
 		}
 
-		if (aiDefaultSpeed <= playerCar.maxSpeed) {
-			//Set the aiDefaultSpeed
-			aiDefaultSpeed += Mathf.Abs (playerCar.maxSpeed - aiDefaultSpeed) * .5f;
-		}
+		//if (aiDefaultSpeed <= playerCar.maxSpeed) {
+		//	//Set the aiDefaultSpeed
+		//	aiDefaultSpeed += Mathf.Abs (playerCar.maxSpeed - aiDefaultSpeed) * .5f;
+		//}
 		//////////////////////////////////////END CODE/////////////////////////////////////////////////
 
 		for (int i = 0; i < aiNumberToSpawn + 1; i++) {
@@ -78,7 +95,9 @@ public class RaceManager : MonoBehaviour {
 				int selectedCar = Random.Range (0, carToSpawn.Count);
 				allAICars.Add (Instantiate (carToSpawn [selectedCar], startPositions [i].position, startPositions [i].rotation));
 
-				carToSpawn.RemoveAt (selectedCar);
+				if (carToSpawn.Count > aiNumberToSpawn - i) {
+					carToSpawn.RemoveAt (selectedCar);
+				}
 			}
 		}
 	}
@@ -168,6 +187,46 @@ public class RaceManager : MonoBehaviour {
 				playerCar.maxSpeed = Mathf.MoveTowards (playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeed * ((float)playerPos / ((float)allAICars.Count + 1))), rubberBandAccel * Time.deltaTime);
 			}
 		}
+	}
+	public void FinishRace ()
+	{
+		raceCompleted = true;
+		switch (playerPos) {
+
+		case 1:
+			UIManager.instance.raceResultText.text = "1st";
+			UIManager.instance.trophyImage.gameObject.SetActive (true);
+			break;
+
+		case 2:
+			UIManager.instance.raceResultText.text = "2nd";
+			UIManager.instance.trophyImage.gameObject.SetActive (true);
+			break;
+
+		case 3:
+			UIManager.instance.raceResultText.text = "3rd";
+			UIManager.instance.trophyImage.gameObject.SetActive (true);
+			break;
+
+		default:
+			UIManager.instance.raceResultText.text = playerPos + "th";
+
+			break;
+		}
+
+		if (UIManager.instance.raceResultsPanel != null) {
+
+			var ts = System.TimeSpan.FromSeconds (playerCar.bestLapTime);
+			UIManager.instance.raceEndBestLapText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+			UIManager.instance.raceResultsPanel.SetActive (true);
+
+		}
+	}
+
+	public void ExitRace (string scene)
+	{
+		Time.timeScale = 1f;
+		SceneManager.LoadScene (scene);
 	}
 }
 
