@@ -49,33 +49,14 @@ public class RaceManager : MonoBehaviour {
 		}
 
 		isStarting = true;
-		//Ensure Race Results panel is off
-		UIManager.instance.raceResultsPanel.SetActive (false);
-		//Start countdown timer to start number
-		startCounter = timeBetweenStartCount;
-		//Enable Start Counter text and set to current countdown from Editor
-		UIManager.instance.countdownText.gameObject.SetActive (true);
-		UIManager.instance.countdownText.text = countDownCurrent + "!";
+		DisplayRaceStartPanel ();
 
-		//Spawn Player at random Start Position
-		playerStartPosition = Random.Range (0, aiNumberToSpawn + 1);
+		SpawnPlayerCar ();
+		SpawnAICars ();
+		SetCameraTarget ();
 
-		//Spawn player car at the playerStartPosition
-		playerCar = Instantiate (RaceInfoManager.instance.racerCar, startPositions [playerStartPosition].position, startPositions [playerStartPosition].rotation);
-		//Set playerCar ai to false
-		playerCar.isAI = false;
-		//enable audioListner for playerCar
-		playerCar.GetComponent<AudioListener> ().enabled = true;
-
-		//Set Camera target
-		CameraSwitcher.instance.SetTarget (playerCar);
-		playerCar.gameObject.name = "The Player";
-		playerCar.gameObject.tag = "Player";
 		//Set player position in UI
 		UIManager.instance.playerPosText.text = (playerStartPosition + 1) + "/" + (aiNumberToSpawn + 1);
-
-		//playerCar.transform.position = startPositions [playerStartPosition].position;
-		//playerCar.theRB.transform.position = startPositions [playerStartPosition].position;
 
 		/////////////////////Rubber Banding Experimantal Code//////////////////////////////////////////
 		//add half the difference between the players max speed and the aiDefaultSpeed
@@ -90,6 +71,55 @@ public class RaceManager : MonoBehaviour {
 		//}
 		//////////////////////////////////////END CODE/////////////////////////////////////////////////
 
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+		if (isStarting) {
+
+			StartRaceCountDownTimer ();
+
+		} else {
+
+			//Player position check timer
+			posCheckCounter -= Time.deltaTime;
+
+			CheckPlayerPosition ();
+			ManageRubberBanding ();
+		}
+	}
+
+	private void DisplayRaceStartPanel ()
+	{
+		//Ensure Race Results panel is off
+		UIManager.instance.raceResultsPanel.SetActive (false);
+
+		//Start countdown timer to start number
+		startCounter = timeBetweenStartCount;
+
+		//Enable Start Counter text and set to current countdown from Editor
+		UIManager.instance.countdownText.gameObject.SetActive (true);
+		UIManager.instance.countdownText.text = countDownCurrent + "!";
+	}
+
+	private void SpawnPlayerCar ()
+	{
+		//Spawn Player at random Start Position
+		playerStartPosition = Random.Range (0, aiNumberToSpawn + 1);
+
+		//Spawn player car at the playerStartPosition
+		playerCar = Instantiate (RaceInfoManager.instance.racerCar, startPositions [playerStartPosition].position, startPositions [playerStartPosition].rotation);
+
+		//Set playerCar ai to false
+		playerCar.isAI = false;
+
+		//enable audioListner for playerCar
+		playerCar.GetComponent<AudioListener> ().enabled = true;
+	}
+
+	private void SpawnAICars ()
+	{
 		for (int i = 0; i < aiNumberToSpawn + 1; i++) {
 			if (i != playerStartPosition) {
 				int selectedCar = Random.Range (0, carToSpawn.Count);
@@ -102,112 +132,119 @@ public class RaceManager : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update ()
+	private void SetCameraTarget ()
 	{
-		if (isStarting) {
+		//Set Camera target
+		CameraSwitcher.instance.SetTarget (playerCar);
+		playerCar.gameObject.name = "The Player";
+		playerCar.gameObject.tag = "Player";
+	}
 
-			startCounter -= Time.deltaTime;
+	private void ManageRubberBanding ()
+	{
+		//Manage Rubber Banding
+		if (playerPos == 1) {
 
-			if (startCounter <= 0) {
-				countDownCurrent--;
-				startCounter = timeBetweenStartCount;
-				//Update Start Counter
-				UIManager.instance.countdownText.text = countDownCurrent + "!";
-				//Play race countdown sound
-
-
-				if (countDownCurrent == 0) {
-					//Disable Start Counter
-					UIManager.instance.countdownText.gameObject.SetActive (false);
-					//Enable Race Start Text
-					UIManager.instance.raceStartText.gameObject.SetActive (true);
-
-					//Play race start vfx
-					if (raceStartVFX != null) {
-						raceStartVFX.Play ();
-
-					}
-					isStarting = false;
-				}
-
+			//If player is in First Place Speed up AI cars and slow down player car
+			foreach (CarController aiCar in allAICars) {
+				aiCar.maxSpeed = Mathf.MoveTowards (aiCar.maxSpeed, aiDefaultSpeed + rubberBandSpeed, rubberBandAccel * Time.deltaTime);
 			}
-
+			playerCar.maxSpeed = Mathf.MoveTowards (playerCar.maxSpeed, playerDefaultSpeed - rubberBandSpeed, rubberBandAccel * Time.deltaTime);
 		} else {
 
-			//Player position check timer
-			posCheckCounter -= Time.deltaTime;
+			//Slow down AI cars depending on position to player
+			foreach (CarController aiCar in allAICars) {
+				aiCar.maxSpeed = Mathf.MoveTowards (aiCar.maxSpeed, aiDefaultSpeed - (rubberBandSpeed * ((float)playerPos / ((float)allAICars.Count + 1))), rubberBandAccel * Time.deltaTime);
+			}
 
-			if (posCheckCounter <= 0) {
-				playerPos = 1;
+			//Speed up player car depending on player position
+			playerCar.maxSpeed = Mathf.MoveTowards (playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeed * ((float)playerPos / ((float)allAICars.Count + 1))), rubberBandAccel * Time.deltaTime);
+		}
+	}
 
-				if (allAICars.Count > 0) {
+	private void CheckPlayerPosition ()
+	{
+		if (posCheckCounter <= 0) {
+			playerPos = 1;
 
-					//Check player position
-					foreach (CarController aiCar in allAICars) {
-						//Lap Ahead
-						if (aiCar.currentLap > playerCar.currentLap) {
+			if (allAICars.Count > 0) {
+
+				//Check player position
+				foreach (CarController aiCar in allAICars) {
+					//Lap Ahead
+					if (aiCar.currentLap > playerCar.currentLap) {
+						playerPos++;
+						//Same Lap
+					} else if (aiCar.currentLap == playerCar.currentLap) {
+						if (aiCar.nextCheckPoint > playerCar.nextCheckPoint) {
 							playerPos++;
-							//Same Lap
-						} else if (aiCar.currentLap == playerCar.currentLap) {
-							if (aiCar.nextCheckPoint > playerCar.nextCheckPoint) {
+							//Same Checkpoint
+						} else if (aiCar.nextCheckPoint == playerCar.nextCheckPoint) {
+							if (Vector3.Distance (aiCar.transform.position, allCheckPoints [aiCar.nextCheckPoint].transform.position) < Vector3.Distance (playerCar.transform.position, allCheckPoints [aiCar.nextCheckPoint].transform.position)) {
 								playerPos++;
-								//Same Checkpoint
-							} else if (aiCar.nextCheckPoint == playerCar.nextCheckPoint) {
-								if (Vector3.Distance (aiCar.transform.position, allCheckPoints [aiCar.nextCheckPoint].transform.position) < Vector3.Distance (playerCar.transform.position, allCheckPoints [aiCar.nextCheckPoint].transform.position)) {
-									playerPos++;
-								}
 							}
 						}
 					}
-
 				}
-				//Reset posCheckCounter
-				posCheckCounter = timeBetweenPosCheck;
-				//Update Player position UI
-				UIManager.instance.playerPosText.text = playerPos + "/" + (allAICars.Count + 1);
+
 			}
-
-			//Manage Rubber Banding
-			if (playerPos == 1) {
-
-				//If player is in First Place Speed up AI cars and slow down player car
-				foreach (CarController aiCar in allAICars) {
-					aiCar.maxSpeed = Mathf.MoveTowards (aiCar.maxSpeed, aiDefaultSpeed + rubberBandSpeed, rubberBandAccel * Time.deltaTime);
-				}
-				playerCar.maxSpeed = Mathf.MoveTowards (playerCar.maxSpeed, playerDefaultSpeed - rubberBandSpeed, rubberBandAccel * Time.deltaTime);
-			} else {
-
-				//Slow down AI cars depending on position to player
-				foreach (CarController aiCar in allAICars) {
-					aiCar.maxSpeed = Mathf.MoveTowards (aiCar.maxSpeed, aiDefaultSpeed - (rubberBandSpeed * ((float)playerPos / ((float)allAICars.Count + 1))), rubberBandAccel * Time.deltaTime);
-				}
-
-				//Speed up player car depending on player position
-				playerCar.maxSpeed = Mathf.MoveTowards (playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeed * ((float)playerPos / ((float)allAICars.Count + 1))), rubberBandAccel * Time.deltaTime);
-			}
+			//Reset posCheckCounter
+			posCheckCounter = timeBetweenPosCheck;
+			//Update Player position UI
+			UIManager.instance.playerPosText.text = playerPos + "/" + (allAICars.Count + 1);
 		}
 	}
+
+	private void StartRaceCountDownTimer ()
+	{
+		startCounter -= Time.deltaTime;
+
+		if (startCounter <= 0) {
+			countDownCurrent--;
+			startCounter = timeBetweenStartCount;
+			//Update Start Counter
+			UIManager.instance.countdownText.text = countDownCurrent + "!";
+			//Play race countdown sound
+
+
+			if (countDownCurrent == 0) {
+				//Disable Start Counter
+				UIManager.instance.countdownText.gameObject.SetActive (false);
+				//Enable Race Start Text
+				UIManager.instance.raceStartText.gameObject.SetActive (true);
+
+				//Play race start vfx
+				if (raceStartVFX != null) {
+					raceStartVFX.Play ();
+
+				}
+				isStarting = false;
+			}
+
+		}
+	}
+
 	public void FinishRace ()
 	{
 		raceCompleted = true;
+		//Determine players finishing position and display in race completed UI
 		switch (playerPos) {
-
+		//First Place
 		case 1:
 			UIManager.instance.raceResultText.text = "1st";
 			UIManager.instance.trophyImage.gameObject.SetActive (true);
 			break;
-
+		//Second Place
 		case 2:
 			UIManager.instance.raceResultText.text = "2nd";
 			UIManager.instance.trophyImage.gameObject.SetActive (true);
 			break;
-
+		//Third Place
 		case 3:
 			UIManager.instance.raceResultText.text = "3rd";
 			UIManager.instance.trophyImage.gameObject.SetActive (true);
 			break;
-
+		//All other finishing places
 		default:
 			UIManager.instance.raceResultText.text = playerPos + "th";
 
@@ -228,6 +265,7 @@ public class RaceManager : MonoBehaviour {
 		Time.timeScale = 1f;
 		SceneManager.LoadScene (scene);
 	}
+
 }
 
 

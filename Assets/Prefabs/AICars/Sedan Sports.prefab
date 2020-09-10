@@ -135,12 +135,12 @@ PrefabInstance:
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: aiReachPointRange
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: aiPointVariance
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}

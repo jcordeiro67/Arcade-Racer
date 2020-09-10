@@ -145,8 +145,9 @@ public class CarController : MonoBehaviour {
 				} else {
 					aiSpeedInput = Mathf.MoveTowards (aiSpeedInput, aiTurnSpeed, aiAccelerationSpeed);
 				}
-				//AI Randomize speed each lap
-				aiSpeedMod = Random.Range (0.7f, 1.1f);
+
+				//AI Randomize speed each lap ******* MOVED TO LapCompleted() 
+				//aiSpeedMod = Random.Range (0.7f, 1.1f);
 				speedInput = aiSpeedInput * forwardAccel * aiSpeedMod;
 			}
 
@@ -286,6 +287,9 @@ public class CarController : MonoBehaviour {
 		if (currentLap <= RaceManager.instance.totalLaps) {
 			//Reset lapCounter
 			lapTime = 0f;
+
+			//AI Randomize speed each lap
+			aiSpeedMod = Random.Range (0.7f, 1.1f);
 
 			if (!isAI) {
 				//Set bestLapTime UI Text

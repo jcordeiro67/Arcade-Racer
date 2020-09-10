@@ -241,6 +241,11 @@ PrefabInstance:
       propertyPath: isAI
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2927623476948114201, guid: 689d743aba7744110b03aee38d4650a3,
+        type: 3}
+      propertyPath: aiPointVariance
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2927623476948114202, guid: 689d743aba7744110b03aee38d4650a3,
         type: 3}
       propertyPath: m_Enabled
