@@ -227,12 +227,23 @@ public class RaceManager : MonoBehaviour {
 	public void FinishRace ()
 	{
 		raceCompleted = true;
+		RaceInfoManager.instance.enteredRace = false;
+
 		//Determine players finishing position and display in race completed UI
 		switch (playerPos) {
 		//First Place
 		case 1:
 			UIManager.instance.raceResultText.text = "1st";
 			UIManager.instance.trophyImage.gameObject.SetActive (true);
+
+			if (RaceInfoManager.instance.trackToUnlock != "") {
+				if (!PlayerPrefs.HasKey (RaceInfoManager.instance.trackToUnlock + "_unlocked")) {
+					PlayerPrefs.SetInt (RaceInfoManager.instance.trackToUnlock + "_unlocked", 1);
+					UIManager.instance.trackUnlockedText.SetActive (true);
+				}
+
+			}
+
 			break;
 		//Second Place
 		case 2:
@@ -264,6 +275,7 @@ public class RaceManager : MonoBehaviour {
 	{
 		Time.timeScale = 1f;
 		SceneManager.LoadScene (scene);
+
 	}
 
 }

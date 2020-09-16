@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour {
 	public Image trophyImage;
 	public TMP_Text raceEndBestLapText;
 	public GameObject raceResultsPanel;
+	public GameObject trackUnlockedText;
 	public GameObject pauseScrene;
 
 	public bool isPaused;
@@ -51,8 +52,11 @@ public class UIManager : MonoBehaviour {
 	public void ExitRace ()
 	{
 		Time.timeScale = 1f;
+		RaceInfoManager.instance.enteredRace = true;
 		RaceManager.instance.ExitRace ("MainMenu");
+
 	}
+
 	//Restart the last race
 	public void ReTryRace ()
 	{

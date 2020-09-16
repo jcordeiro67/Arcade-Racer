@@ -1,13 +1,16 @@
 ﻿<Properties StartupConfiguration="{6775D533-AB61-6128-8EE6-FC08D94C6146}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraSwitcher.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MusicManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/RaceInfoManager.cs" Line="26" Column="3" />
-      <File FileName="Assets/Scripts/RaceManager.cs" Line="59" Column="66" />
-      <File FileName="Assets/Scripts/MainMenu.cs" Line="21" Column="26" />
-      <File FileName="Assets/Scripts/UIManager.cs" Line="42" Column="4" />
-      <File FileName="Assets/Scripts/CarController.cs" Line="98" Column="132" />
+      <File FileName="Assets/Scripts/RaceInfoManager.cs" Line="17" Column="30" />
+      <File FileName="Assets/Scripts/RaceManager.cs" Line="243" Column="6" />
+      <File FileName="Assets/Scripts/MainMenu.cs" Line="30" Column="82" />
+      <File FileName="Assets/Scripts/UIManager.cs" Line="22" Column="38" />
+      <File FileName="Assets/Scripts/CarController.cs" Line="35" Column="26" />
       <File FileName="Assets/Scripts/CameraController.cs" Line="30" Column="1" />
-      <File FileName="Assets/Scripts/CameraSwitcher.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/CameraSwitcher.cs" Line="46" Column="35" />
+      <File FileName="Assets/Scripts/TrackSelectButton.cs" Line="45" Column="64" />
+      <File FileName="Assets/Scripts/RacerSelectButton.cs" Line="27" Column="1" />
+      <File FileName="Assets/Scripts/MusicManager.cs" Line="7" Column="7" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,7 +18,7 @@
           <Node name="Arcade Racer" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="CameraSwitcher.cs" selected="True" />
+                <Node name="MusicManager.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -26,7 +29,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <Debugger.DebugSourceFolders />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="04546333-2eb6-496c-8dc0-898d37aa19c5" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d2dee20e-95ca-48db-a227-f12547134b9b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

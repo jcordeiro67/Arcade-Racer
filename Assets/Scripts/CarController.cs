@@ -45,8 +45,6 @@ public class CarController : MonoBehaviour {
 	private bool grounded;
 	private float dragOnGround;
 
-
-
 	public float lapTime;
 	public float bestLapTime;
 
@@ -66,7 +64,7 @@ public class CarController : MonoBehaviour {
 	{
 		theRB.transform.parent = null;
 		dragOnGround = theRB.drag;
-		//emmissionRate = 0f;
+		emmissionRate = 0f;
 
 		if (isAI) {
 			targetPoint = RaceManager.instance.allCheckPoints [currentTarget].transform.position;
@@ -80,6 +78,7 @@ public class CarController : MonoBehaviour {
 			UIManager.instance.lapCounterText.text = currentLap + "/" + RaceManager.instance.totalLaps;
 		}
 
+		//Setup resetCounter
 		resetCounter = resetCoolDown;
 	}
 
@@ -93,42 +92,37 @@ public class CarController : MonoBehaviour {
 			lapTime += Time.deltaTime;
 
 			if (!isAI) {
-				//Update Lap Time UI
+
+				//Update Lap Time UI for Player
 				var ts = System.TimeSpan.FromSeconds (lapTime);
 				UIManager.instance.currentLapTimeText.text = string.Format ("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
 
-
-				//DRIVE INPUT
 				speedInput = 0f;
-				if (Input.GetAxis ("Vertical") > 0) {
-					speedInput = Input.GetAxis ("Vertical") * forwardAccel;
-				} else if (Input.GetAxis ("Vertical") < 0) {
-					speedInput = Input.GetAxis ("Vertical") * reverseAccel;
-				}
 
-				//TURNING CAR
-				turnInput = Input.GetAxis ("Horizontal");
+				WaitForPlayerInput ();
 
-				//RESET CAR TO TRACK
+				//Start Player Reset Counter
 				if (resetCounter > 0) {
 
 					resetCounter -= Time.deltaTime;
 				}
 
+				//Reset Car to track player input
 				if (Input.GetKeyDown (KeyCode.R) && resetCounter <= 0) {
 					ResetToTrack ();
 				}
 
 
 			} else {
-				//Set targetPoint y to match car's y
+				//Set AI's targetPoint transform.position.y  to match AI car's transform.position.y
 				targetPoint.y = transform.position.y;
 
+				//Set AI's Next Target when AI is in range of current target
 				if (Vector3.Distance (transform.position, targetPoint) < aiReachPointRange) {
 					SetNextAITarget ();
 				}
 
-				//Ai Turning
+				//AI Turning
 				Vector3 targetDir = targetPoint - transform.position;
 				float angle = Vector3.Angle (targetDir, transform.forward);
 
@@ -151,17 +145,14 @@ public class CarController : MonoBehaviour {
 				speedInput = aiSpeedInput * forwardAccel * aiSpeedMod;
 			}
 
-			//TURNING WHEELS
+			//TURNING CARS WHEELS
 			leftFrontWheel.localRotation = Quaternion.Euler (leftFrontWheel.localRotation.eulerAngles.x, (turnInput * maxWheelTurn) - 180, leftFrontWheel.localRotation.eulerAngles.z);
 			rightFrontWheel.localRotation = Quaternion.Euler (rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, rightFrontWheel.localRotation.eulerAngles.z);
-
-			//Set Cars Position to the RigidBody
-			//transform.position = theRB.transform.position;
 
 			//Dust Trail Emission
 			emmissionRate = Mathf.MoveTowards (emmissionRate, 0f, emmissionFadeSpeed * Time.deltaTime);
 
-			//Emmit if turning or spped is lees then 1/2 masSpeed and not 0
+			//Emmit if turning or speed is lees then 1/2 maxSpeed and magnitude not 0
 			if (grounded && (Mathf.Abs (turnInput) > turningThreshold || (theRB.velocity.magnitude < maxSpeed * speedThreshold && theRB.velocity.magnitude != 0))) {
 				emmissionRate = maxEmmission;
 			}
@@ -243,6 +234,18 @@ public class CarController : MonoBehaviour {
 		}
 	}
 
+	private void WaitForPlayerInput ()
+	{
+		//Player INPUT
+		if (Input.GetAxis ("Vertical") > 0) {
+			speedInput = Input.GetAxis ("Vertical") * forwardAccel;
+		} else if (Input.GetAxis ("Vertical") < 0) {
+			speedInput = Input.GetAxis ("Vertical") * reverseAccel;
+		}
+
+		//TURNING CAR
+		turnInput = Input.GetAxis ("Horizontal");
+	}
 
 	public void CheckPointHit (int checkPoint)
 	{

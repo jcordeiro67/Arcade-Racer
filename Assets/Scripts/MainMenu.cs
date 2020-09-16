@@ -1,25 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 
+	public static MainMenu instance;
 
-	// Start is called before the first frame update
-	void Start ()
+	public GameObject raceSetupPanel, trackSelectPanel, racerSelectPanel;
+	public Image trackSelectImage;
+	public Image racerSelectImage;
+
+
+
+	private void Awake ()
 	{
+		instance = this;
+	}
+
+	private void Start ()
+	{
+		if (RaceInfoManager.instance.enteredRace) {
+			trackSelectImage.sprite = RaceInfoManager.instance.trackSprite;
+			racerSelectImage.sprite = RaceInfoManager.instance.racerSprite;
+			OpenRaceSetup ();
+		}
+		if (!PlayerPrefs.HasKey (RaceInfoManager.instance.trackToLoad + "_unlocked")) {
+			PlayerPrefs.SetInt (RaceInfoManager.instance.trackToLoad + "_unlocked", 1);
+		}
 
 	}
 
-	// Update is called once per frame
-	void Update ()
+	public void StartRace ()
 	{
-
-	}
-
-	public void StartGame ()
-	{
+		RaceInfoManager.instance.enteredRace = true;
 		SceneManager.LoadScene (RaceInfoManager.instance.trackToLoad);
 	}
 
@@ -28,4 +44,40 @@ public class MainMenu : MonoBehaviour {
 		Application.Quit ();
 		Debug.Log ("Quit GAme");
 	}
+
+	public void OpenRaceSetup ()
+	{
+		raceSetupPanel.SetActive (true);
+	}
+
+	public void CloseRaceSetup ()
+	{
+		raceSetupPanel.SetActive (false);
+		RaceInfoManager.instance.enteredRace = false;
+	}
+
+	public void OpenTrackSelect ()
+	{
+		CloseRaceSetup ();
+		trackSelectPanel.SetActive (true);
+	}
+
+	public void CloseTrackSelect ()
+	{
+		trackSelectPanel.SetActive (false);
+		OpenRaceSetup ();
+	}
+
+	public void OpenRacerSelect ()
+	{
+		CloseRaceSetup ();
+		racerSelectPanel.SetActive (true);
+	}
+
+	public void CloseRacerSelect ()
+	{
+		racerSelectPanel.SetActive (false);
+		OpenRaceSetup ();
+	}
+
 }

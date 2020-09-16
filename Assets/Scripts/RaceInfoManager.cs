@@ -12,6 +12,9 @@ public class RaceInfoManager : MonoBehaviour {
 	public int noOfAi;
 	public int noOfLaps;
 
+	public bool enteredRace;
+	public Sprite trackSprite, racerSprite;
+	public string trackToUnlock;
 
 	private void Awake ()
 	{
@@ -25,15 +28,4 @@ public class RaceInfoManager : MonoBehaviour {
 
 	}
 
-	// Start is called before the first frame update
-	void Start ()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-
-	}
 }
