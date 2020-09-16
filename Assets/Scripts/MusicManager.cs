@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof (AudioSource))]
 public class MusicManager : MonoBehaviour {
 
 	public AudioClip [] UIBackgroundMusic;
@@ -13,6 +14,9 @@ public class MusicManager : MonoBehaviour {
 		audioSource = GetComponent<AudioSource> ();
 		int audioClip = Random.Range (0, UIBackgroundMusic.Length);
 		audioSource.clip = UIBackgroundMusic [audioClip];
+		if (audioSource.loop == false) {
+			audioSource.loop = true;
+		}
 		audioSource.Play ();
 	}
 

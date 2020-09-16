@@ -38,7 +38,7 @@ public class TrackSelectButton : MonoBehaviour {
 			RaceInfoManager.instance.trackToLoad = trackSceneName;
 			RaceInfoManager.instance.noOfLaps = raceLaps;
 			RaceInfoManager.instance.trackSprite = trackImage.sprite;
-
+			MainMenu.instance.noOfLaps.value = raceLaps;
 			MainMenu.instance.trackSelectImage.sprite = trackImage.sprite;
 
 			MainMenu.instance.CloseTrackSelect ();

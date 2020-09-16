@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour {
 	public GameObject raceSetupPanel, trackSelectPanel, racerSelectPanel;
 	public Image trackSelectImage;
 	public Image racerSelectImage;
+	public Slider noOfLaps, noOfAI;
 
 
 
@@ -25,11 +26,17 @@ public class MainMenu : MonoBehaviour {
 		if (RaceInfoManager.instance.enteredRace) {
 			trackSelectImage.sprite = RaceInfoManager.instance.trackSprite;
 			racerSelectImage.sprite = RaceInfoManager.instance.racerSprite;
+			noOfLaps.value = RaceInfoManager.instance.noOfLaps;
+			noOfAI.value = RaceInfoManager.instance.noOfAi;
 			OpenRaceSetup ();
 		}
+
 		if (!PlayerPrefs.HasKey (RaceInfoManager.instance.trackToLoad + "_unlocked")) {
 			PlayerPrefs.SetInt (RaceInfoManager.instance.trackToLoad + "_unlocked", 1);
 		}
+
+		noOfLaps.value = RaceInfoManager.instance.noOfLaps;
+		noOfAI.value = RaceInfoManager.instance.noOfAi;
 
 	}
 
@@ -78,6 +85,16 @@ public class MainMenu : MonoBehaviour {
 	{
 		racerSelectPanel.SetActive (false);
 		OpenRaceSetup ();
+	}
+
+	public void SetNoOfLaps ()
+	{
+		RaceInfoManager.instance.noOfLaps = (int)noOfLaps.value;
+	}
+
+	public void SetNoOfAI ()
+	{
+		RaceInfoManager.instance.noOfAi = (int)noOfAI.value;
 	}
 
 }
